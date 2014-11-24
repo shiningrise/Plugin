@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
 [assembly: AssemblyTitle("Plugin.Interfaces")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Plugin.Interfaces")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Sky123.Org")]
 [assembly: AssemblyProduct("Plugin.Interfaces")]
