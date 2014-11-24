@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Plugin.Interfaces")]
 [assembly: AssemblyDescription("Plugin.Interfaces")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Sky123.Org")]
+[assembly: AssemblyCompany("shiningrise@gmail.com")]
 [assembly: AssemblyProduct("Plugin.Interfaces")]
-[assembly: AssemblyCopyright("Copyright © Sky123.Org 2014")]
+[assembly: AssemblyCopyright("Copyright © shiningrise@gmail.com 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
