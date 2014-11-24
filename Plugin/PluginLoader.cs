@@ -90,7 +90,7 @@ namespace Plugin
             //assemblies = assemblies.Union(TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Select(x => Assembly.LoadFile(x.FullName)).ToList());
             InitPlugins(assemblies, plugins);
 
-            return plugins;
+            return plugins.Where(p => p.Plugin != null);
         }
 
         /// <summary>
