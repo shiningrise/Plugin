@@ -15,23 +15,23 @@ namespace Plugin
     {
         #region Const
 
-        public static string InstalledPluginsFilePath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,@"App_Data\InstalledPlugins.txt");
-        public static string PluginsPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,@"Plugins");
-        public static string ShadowCopyPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase,@"App_Data\Plugins");
+        public static string InstalledPluginsFilePath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"App_Data\InstalledPlugins.txt");
+        public static string PluginsPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"Plugins");
+        public static string ShadowCopyPath = Path.Combine(AppDomain.CurrentDomain.SetupInformation.ApplicationBase, @"App_Data\Plugins");
 
         #endregion
 
         /// <summary>
         /// 插件目录。
         /// </summary>
-        private static readonly DirectoryInfo PluginFolder;
+        private static DirectoryInfo PluginFolder;
 
         /// <summary>
         /// 插件临时目录。
         /// </summary>
-        private static readonly DirectoryInfo TempPluginFolder;
+        private static DirectoryInfo TempPluginFolder;
 
-        private static readonly List<string> FrameworkPrivateBinFiles;
+        private static List<string> FrameworkPrivateBinFiles;
 
         /// <summary>
         /// 初始化。
@@ -45,6 +45,11 @@ namespace Plugin
 #endif
             var FrameworkPrivateBin = new DirectoryInfo(System.AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
             FrameworkPrivateBinFiles = FrameworkPrivateBin.GetFiles().Select(p => p.Name).ToList();
+
+            //foreach (var item in FrameworkPrivateBinFiles)
+            //{
+            //    Debug.WriteLine(item);
+            //}
         }
 
         /// <summary>
@@ -52,6 +57,7 @@ namespace Plugin
         /// </summary>
         public static IEnumerable<PluginDescriptor> Load()
         {
+
             var installedPluginSystemNames = PluginFileParser.ParseInstalledPluginsFile(GetInstalledPluginsFilePath());
 
             List<PluginDescriptor> plugins = new List<PluginDescriptor>();
@@ -61,12 +67,12 @@ namespace Plugin
 
             foreach (var pluginFolder in PluginFolder.GetDirectories())
             {
-                if(installedPluginSystemNames.Count > 0 && installedPluginSystemNames.Contains(pluginFolder.Name) == false)
+                if (installedPluginSystemNames.Count > 0 && installedPluginSystemNames.Contains(pluginFolder.Name) == false)
                 {
                     continue;
                 }
                 var descriptionFilepath = Path.Combine(pluginFolder.FullName, "Description.txt");
-                if(File.Exists(descriptionFilepath))
+                if (File.Exists(descriptionFilepath))
                 {
                     var pluginDescriptor = PluginFileParser.ParsePluginDescriptionFile(descriptionFilepath);
                     pluginDescriptor.Name = pluginFolder.Name;
@@ -85,10 +91,10 @@ namespace Plugin
             CopyToTempPluginFolderDirectory(plugins);
 
             //加载 bin 目录下的所有程序集。
-            IEnumerable<Assembly> assemblies = TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Select(x => Assembly.LoadFile(x.FullName)).ToList();//AppDomain.CurrentDomain.GetAssemblies();
+            IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies();
             //加载临时目录下的所有程序集。
-            //assemblies = assemblies.Union(TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Select(x => Assembly.LoadFile(x.FullName)).ToList());
-            InitPlugins(assemblies, plugins);
+            var list = TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Select(x => Assembly.LoadFile(x.FullName)).ToList().FindAll(p => assemblies.Contains(p) == false);
+            InitPlugins(list.Union(assemblies), plugins);
 
             return plugins.Where(p => p.Plugin != null);
         }
@@ -130,7 +136,7 @@ namespace Plugin
         /// </summary>
         private static void CopyToTempPluginFolderDirectory(List<PluginDescriptor> pluginDescriptions)
         {
-            
+
             Directory.CreateDirectory(PluginFolder.FullName);
             Directory.CreateDirectory(TempPluginFolder.FullName);
 
@@ -153,13 +159,13 @@ namespace Plugin
             //复制插件进临时文件夹。
             foreach (var plugin in pluginDescriptions)
             {
-                var PluginFileNames = plugin.PluginFileName == null ? new string[]{} : plugin.PluginFileName.Split(',');
+                var PluginFileNames = plugin.PluginFileName == null ? new string[] { } : plugin.PluginFileName.Split(',');
                 var dir = new DirectoryInfo(Path.Combine(PluginFolder.FullName, Path.Combine(plugin.Name, "bin")));
-                var list = dir.GetFiles("*.dll", SearchOption.AllDirectories);
+                var list = dir.GetFiles("Plugin.*.dll");
                 var plugindlls = new List<FileInfo>();
                 foreach (var item in list)
                 {
-                    if((PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true || PluginFileNames.Length == 0) && FrameworkPrivateBinFiles.Contains(item.Name) == false)
+                    if ((PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true || PluginFileNames.Length == 0) && FrameworkPrivateBinFiles.Contains(item.Name) == false)
                         plugindlls.Add(item);
                 }
                 foreach (var plugindll in plugindlls)
@@ -201,7 +207,7 @@ namespace Plugin
                         {
                             var plugin = (IPlugin)Activator.CreateInstance(pluginType);
                             var descriptor = descriptors.Where(p => p.Name == plugin.Name).FirstOrDefault();
-                            if(descriptor != null)
+                            if (descriptor != null)
                             {
                                 descriptor.Init(plugin, assemblies);
                             }

@@ -1,10 +1,12 @@
 ﻿[assembly: System.Web.PreApplicationStartMethod(typeof(Plugin.Mvc.Bootstrapper), "Initialize")]
+
 namespace Plugin.Mvc
 {
+    using Plugin;
+    using Plugin.Mvc;
+    using System;
+    using System.Diagnostics;
     using System.Web.Mvc;
-
-    using PluginMvc.Framework;
-    using PluginMvc.Framework.Mvc;
 
     /// <summary>
     /// 引导程序。
@@ -16,6 +18,7 @@ namespace Plugin.Mvc
         /// </summary>
         public static void Initialize()
         {
+
             //注册插件控制器工厂。
             ControllerBuilder.Current.SetControllerFactory(new PluginControllerFactory());
 

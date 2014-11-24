@@ -1,0 +1,7 @@
+﻿Group: core
+FriendlyName: Admin
+Version: 1.00
+SupportedVersions: 1.00
+Author: wxy
+DisplayOrder: 1
+FileName: Admin.dll

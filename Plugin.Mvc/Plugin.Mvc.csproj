@@ -83,6 +83,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Plugin.Interfaces\Plugin.Interfaces.csproj">
+      <Project>{93c89467-7b77-4a2a-9c13-0795d94f0a11}</Project>
+      <Name>Plugin.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Plugin\Plugin.csproj">
       <Project>{673effae-960c-4f53-b04f-aad88a196315}</Project>
       <Name>Plugin</Name>

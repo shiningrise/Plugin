@@ -48,8 +48,7 @@ namespace Plugin
             {
                 DependentAssemblys = new List<Assembly>();
             }
-            var assems = assemblies.Where(p => plugin.DependentAssembly.Contains(p.GetName().Name)).ToList();
-            DependentAssemblys.AddRange(assems);
+            DependentAssemblys.AddRange(assemblies);
 
         }
 

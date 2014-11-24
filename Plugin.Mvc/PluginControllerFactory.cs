@@ -4,7 +4,7 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Linq;
 
-namespace PluginMvc.Framework.Mvc
+namespace Plugin.Mvc
 {
     /// <summary>
     /// 插件控制器工厂。

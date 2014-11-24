@@ -12,8 +12,6 @@ namespace Plugin
         /// </summary>
         string Name { get; }
 
-        List<string> DependentAssembly { get; }
-
         /// <summary>
         /// 初始化。
         /// </summary>
