@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Mvc", "Plugin.Mvc\Pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Interfaces", "Plugin.Interfaces\Plugin.Interfaces.csproj", "{93C89467-7B77-4A2A-9C13-0795D94F0A11}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{43635B87-1EF1-48E6-B398-8599C1025337}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{673EFFAE-960C-4F53-B04F-AAD88A196315} = {43635B87-1EF1-48E6-B398-8599C1025337}
+		{93C89467-7B77-4A2A-9C13-0795D94F0A11} = {43635B87-1EF1-48E6-B398-8599C1025337}
+		{F7E3A616-71D8-4608-90AC-DC345A7FE7E5} = {43635B87-1EF1-48E6-B398-8599C1025337}
 	EndGlobalSection
 EndGlobal
