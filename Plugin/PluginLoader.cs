@@ -161,11 +161,11 @@ namespace Plugin
             {
                 var PluginFileNames = plugin.PluginFileName == null ? new string[] { } : plugin.PluginFileName.Split(',');
                 var dir = new DirectoryInfo(Path.Combine(PluginFolder.FullName, Path.Combine(plugin.Name, "bin")));
-                var list = dir.GetFiles("Plugin.*.dll");
+                var list = dir.GetFiles("*.dll");
                 var plugindlls = new List<FileInfo>();
                 foreach (var item in list)
                 {
-                    if ((PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true || PluginFileNames.Length == 0) && FrameworkPrivateBinFiles.Contains(item.Name) == false)
+                    if ((PluginFileNames.Length == 0 || PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true || item.Name.StartsWith("Plugin.")) && FrameworkPrivateBinFiles.Contains(item.Name) == false)
                         plugindlls.Add(item);
                 }
                 foreach (var plugindll in plugindlls)
