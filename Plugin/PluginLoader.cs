@@ -136,7 +136,6 @@ namespace Plugin
         /// </summary>
         private static void CopyToTempPluginFolderDirectory(List<PluginDescriptor> pluginDescriptions)
         {
-
             Directory.CreateDirectory(PluginFolder.FullName);
             Directory.CreateDirectory(TempPluginFolder.FullName);
 
