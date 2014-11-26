@@ -39,10 +39,10 @@ namespace Plugin
         static PluginLoader()
         {
             PluginFolder = new DirectoryInfo(PluginsPath);
-            TempPluginFolder = new DirectoryInfo(AppDomain.CurrentDomain.DynamicDirectory);
-#if DEBUG
+//            TempPluginFolder = new DirectoryInfo(AppDomain.CurrentDomain.DynamicDirectory);
+//#if DEBUG
             TempPluginFolder = new DirectoryInfo(ShadowCopyPath);
-#endif
+//#endif
             var FrameworkPrivateBin = new DirectoryInfo(System.AppDomain.CurrentDomain.SetupInformation.PrivateBinPath);
             FrameworkPrivateBinFiles = FrameworkPrivateBin.GetFiles().Select(p => p.Name).ToList();
 
@@ -164,8 +164,14 @@ namespace Plugin
                 var plugindlls = new List<FileInfo>();
                 foreach (var item in list)
                 {
-                    if ((PluginFileNames.Length == 0 || PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true || item.Name.StartsWith("Plugin.")) && FrameworkPrivateBinFiles.Contains(item.Name) == false)
+                    if (FrameworkPrivateBinFiles.Contains(item.Name) == true)
+                        continue;
+                    if(item.Name.StartsWith("Plugin."))
                         plugindlls.Add(item);
+                    else if(PluginFileNames.Length > 0 && PluginFileNames.Contains(item.Name) == true)
+                    {
+                        plugindlls.Add(item);
+                    }
                 }
                 foreach (var plugindll in plugindlls)
                 {
