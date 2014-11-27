@@ -20,6 +20,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApplication1", "WebApplication1\WebApplication1.csproj", "{1795BF2A-6BF6-4BEA-BE5D-DBEDB0FA918E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Contents", "WebApplication1\Plugins\Contents\Plugin.Contents.csproj", "{353D623C-2F8D-4891-AC38-D3310C5F52DF}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A024513F-65A6-4180-BC6A-4B99187A4F59} = {A024513F-65A6-4180-BC6A-4B99187A4F59}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Plugin.Contents.Models", "Plugins\Plugin.Contents.Models\Plugin.Contents.Models.csproj", "{A024513F-65A6-4180-BC6A-4B99187A4F59}"
 EndProject

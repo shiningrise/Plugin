@@ -77,7 +77,7 @@ namespace Plugin.Mvc
         public override ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName, bool useCache)
         {
             string areaName = GetAreaName(controllerContext.RouteData);
-            UpdatePath(areaName);
+         //   UpdatePath(areaName);
             UpdateRouteData(areaName, controllerContext);
             if (areaName != null)
             {
@@ -89,7 +89,7 @@ namespace Plugin.Mvc
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
         {
             string areaName = GetAreaName(controllerContext.RouteData);
-            UpdatePath(areaName);
+        //    UpdatePath(areaName);
             UpdateRouteData(areaName, controllerContext);
             if (areaName != null)
             {
