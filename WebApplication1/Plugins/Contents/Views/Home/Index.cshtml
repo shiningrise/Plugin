@@ -1,0 +1,16 @@
+﻿@using Plugin.Contents.Models;
+
+@{
+    ViewBag.Title = "List";
+}
+
+@model ContentItem
+
+@*//<h2>@Model.Title</h2>*@
+
+Contents/Content/Index
+
+<ul class="nav navbar-nav">
+    <li>@Html.ActionLink("主页", "Index", "Home")</li>
+</ul>
+@ViewContext.Controller.ToString()

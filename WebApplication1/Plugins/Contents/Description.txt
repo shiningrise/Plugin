@@ -1,0 +1,8 @@
+﻿Group: core
+FriendlyName: Contents
+SystemName: Contents
+Version: 1.00
+SupportedVersions: 1.00
+Author: wxy
+DisplayOrder: 1
+FileName: Plugin.Contents.dll,Plugin.Contents.Models.dll

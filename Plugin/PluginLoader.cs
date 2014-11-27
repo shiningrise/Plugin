@@ -94,7 +94,8 @@ namespace Plugin
             IEnumerable<Assembly> assemblies = AppDomain.CurrentDomain.GetAssemblies();
             //加载临时目录下的所有程序集。
             var list = TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Select(x => Assembly.LoadFile(x.FullName)).ToList().FindAll(p => assemblies.Contains(p) == false);
-            InitPlugins(list.Union(assemblies), plugins);
+            list.AddRange(assemblies);
+            InitPlugins(list, plugins);
 
             return plugins.Where(p => p.Plugin != null);
         }
@@ -141,7 +142,7 @@ namespace Plugin
 
             //清理临时文件。
             Debug.WriteLine("清理临时文件");
-            var pluginsTemp = TempPluginFolder.GetFiles("*.dll", SearchOption.AllDirectories).Where(p => FrameworkPrivateBinFiles.Contains(p.Name) == false);
+            var pluginsTemp = TempPluginFolder.GetFiles("*.*", SearchOption.AllDirectories).Where(p => FrameworkPrivateBinFiles.Contains(p.Name) == false);
             foreach (var file in pluginsTemp)
             {
                 try
@@ -179,11 +180,20 @@ namespace Plugin
                     {
                         var srcPath = plugindll.FullName;
                         var toPath = Path.Combine(TempPluginFolder.FullName, plugindll.Name);
-#if DEBUG
-                        Debug.WriteLine(string.Format("from:\t{0}", srcPath));
-                        Debug.WriteLine(string.Format("to:\t{0}", toPath));
-#endif
                         File.Copy(srcPath, toPath, true);
+#if DEBUG
+                        if (srcPath.EndsWith(".dll"))
+                        {
+                            var srcPdbPath = plugindll.FullName.Substring(0, plugindll.FullName.Length - 4) + ".pdb";
+                            var pdfName = plugindll.Name.Substring(0, plugindll.Name.Length - 4) + ".pdb";
+                            var toPdbPath = Path.Combine(TempPluginFolder.FullName, pdfName);
+
+                            if(File.Exists(srcPdbPath))
+                            {
+                                File.Copy(srcPdbPath, toPdbPath, true);
+                            }
+                        }                        
+#endif
                     }
                     catch (Exception)
                     {
