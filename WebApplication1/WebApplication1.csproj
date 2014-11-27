@@ -40,18 +40,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Plugin, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Plugin.0.1.0.0\lib\net40\Plugin.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Interfaces, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Plugin.Interfaces.0.1.0.0\lib\net40\Plugin.Interfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="Plugin.Mvc, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Plugin.Mvc.0.1.0.0\lib\net45\Plugin.Mvc.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -248,6 +236,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Plugin.Interfaces\Plugin.Interfaces.csproj">
+      <Project>{93c89467-7b77-4a2a-9c13-0795d94f0a11}</Project>
+      <Name>Plugin.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin.Mvc\Plugin.Mvc.csproj">
+      <Project>{f7e3a616-71d8-4608-90ac-dc345a7fe7e5}</Project>
+      <Name>Plugin.Mvc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Plugin\Plugin.csproj">
+      <Project>{673effae-960c-4f53-b04f-aad88a196315}</Project>
+      <Name>Plugin</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
