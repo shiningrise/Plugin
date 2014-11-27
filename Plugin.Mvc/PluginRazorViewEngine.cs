@@ -111,7 +111,7 @@ namespace Plugin.Mvc
             {
                 route.DataTokens["area"] = route.DataTokens["pluginName"];
             }
-            else if(pluginName != string.Empty)
+            else if (pluginName != string.Empty)
             {
                 route.DataTokens["area"] = pluginName;
             }
