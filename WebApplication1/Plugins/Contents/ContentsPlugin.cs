@@ -1,12 +1,12 @@
-﻿namespace Plugin.Contents
+﻿using System.Web.Mvc;
+using System.Web.Routing;
+
+using System.Diagnostics;
+using System;
+using System.Reflection;
+
+namespace Plugin.Contents
 {
-    using System.Web.Mvc;
-    using System.Web.Routing;
-
-    using System.Diagnostics;
-    using System;
-    using System.Reflection;
-
     /// <summary>
     /// 内容插件。
     /// </summary>
@@ -16,7 +16,8 @@
         {
             get
             {
-                return "Contents";
+                return Assembly.GetExecutingAssembly().GetName().Name.Replace("Plugin.", "");
+                //return "Contents";
             }
         }
 
@@ -28,6 +29,8 @@
                 url: this.Name + "/{controller}/{action}/{id}",
                 defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional, pluginName = this.Name }
             );
+            route.DataTokens["area"] = this.Name;//设置area的值为Plugin.Name
+
             //route.DataTokens["area"] = this.Name;
             //route.DataTokens["pluginName"] = this.Name; 
         }
