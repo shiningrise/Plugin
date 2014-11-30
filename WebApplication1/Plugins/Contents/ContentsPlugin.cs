@@ -27,17 +27,16 @@ namespace Plugin.Contents
             var route = RouteTable.Routes.MapRoute(
                 name: this.Name,
                 url: this.Name + "/{controller}/{action}/{id}",
-                defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional, pluginName = this.Name }
+                defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional, pluginName = this.Name },
+                namespaces: new string[] { "Plugin.Contents.Controllers" }
             );
             route.DataTokens["area"] = this.Name;//设置area的值为Plugin.Name
 
-            //route.DataTokens["area"] = this.Name;
-            //route.DataTokens["pluginName"] = this.Name; 
         }
 
         public void Unload()
         {
-            RouteTable.Routes.Remove(RouteTable.Routes[this.Name]);
+            //RouteTable.Routes.Remove(RouteTable.Routes[this.Name]);
         }
     }
 }

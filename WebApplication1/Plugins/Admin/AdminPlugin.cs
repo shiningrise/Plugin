@@ -20,17 +20,19 @@ namespace Admin
 
         public void Initialize()
         {
-            var route = RouteTable.Routes.MapRoute(
-                name: "Plugin.Admin",
-                url: "Admin/{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, pluginName = this.Name }
-            );
-            route.DataTokens["area"] = this.Name;//设置area的值为Plugin.Name
+            //var adminarearegistration = new Plugin.Admin.AdminAreaRegistration();
+            //var route = RouteTable.Routes.MapRoute(
+            //    name: "Plugin_Admin",
+            //    url: "Admin/{controller}/{action}/{id}",
+            //    defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, pluginName = this.Name },
+            //    namespaces: new string[] { "Admin.Controllers" }
+            //);
+            //route.DataTokens["area"] = this.Name;//设置area的值为Plugin.Name
         }
 
         public virtual void Unload()
         {
-            RouteTable.Routes.Remove(RouteTable.Routes["Plugin.Admin"]);
+            //RouteTable.Routes.Remove(RouteTable.Routes["Plugin_Admin"]);
         }
     }
 }

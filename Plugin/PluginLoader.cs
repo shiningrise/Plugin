@@ -109,6 +109,11 @@ namespace Plugin
             var filePath = InstalledPluginsFilePath;
             return filePath;
         }
+        public static string GetShadowCopyPath()
+        {
+            var filePath = ShadowCopyPath;
+            return filePath;
+        }
 
         /// <summary>
         /// 获得插件信息。
@@ -194,6 +199,12 @@ namespace Plugin
                             }
                         }                        
 #endif
+                        //we can now register the plugin definition
+                        //var shadowCopiedAssembly = Assembly.Load(AssemblyName.GetAssemblyName(toPath));
+
+                        //add the reference to the build manager
+                        //Debug.WriteLine("Adding to BuildManager: '{0}'", shadowCopiedAssembly.FullName);
+                        //System.Web.Compilation.BuildManager.AddReferencedAssembly(shadowCopiedAssembly);
                     }
                     catch (Exception)
                     {

@@ -76,24 +76,24 @@ namespace Plugin.Mvc
         /// <returns></returns>
         public override ViewEngineResult FindPartialView(ControllerContext controllerContext, string partialViewName, bool useCache)
         {
-            string areaName = GetAreaName(controllerContext.RouteData);
+         //   string areaName = GetAreaName(controllerContext.RouteData);
          //   UpdatePath(areaName);
-            UpdateRouteData(areaName, controllerContext);
-            if (areaName != null)
+        //    UpdateRouteData(areaName, controllerContext);
+        //    if (areaName != null)
             {
-                this.CodeGeneration(areaName);
+            //    this.CodeGeneration(areaName);
             }
             return base.FindPartialView(controllerContext, partialViewName, useCache);
         }
 
         public override ViewEngineResult FindView(ControllerContext controllerContext, string viewName, string masterName, bool useCache)
         {
-            string areaName = GetAreaName(controllerContext.RouteData);
-        //    UpdatePath(areaName);
-            UpdateRouteData(areaName, controllerContext);
-            if (areaName != null)
+            //string areaName = GetAreaName(controllerContext.RouteData);
+            //UpdatePath(areaName);
+            //UpdateRouteData(areaName, controllerContext);
+            //if (areaName != null)
             {
-                this.CodeGeneration(areaName);
+            //    this.CodeGeneration(areaName);
             }
             return base.FindView(controllerContext, viewName, masterName, useCache);
         }
